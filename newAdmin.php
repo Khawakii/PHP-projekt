@@ -33,44 +33,44 @@ $auth->requireAdmin();
 
 <div class="container">
   <div class="card shadow-sm p-4">
-    <h5 class="mb-4">All Registered Users</h5>
+    <h5 class="mb-4">All Admins</h5>
     <div>
-    <a href="admin.php" class="btn btn-primary">Add New User</a> </div>
+    <a href="add_admin.php" class="btn btn-primary">Add New Admin </a> </div>
     <br>
 
     <table class="table table-bordered table-striped">
       <thead class="table-dark">
         <tr>
           <th>#</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Comment</th>
+          <th>username</th>
+          <th>Password</th>
+         
           <th colspan="2" class="text-center">Actions</th>
         </tr>
       </thead>
       <tbody>
         <?php 
-        $sql = "SELECT * FROM user_data";
+        $sql = "SELECT * FROM admin";
         $result = mysqli_query($con, $sql);
         if ($result && mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $id = $row['id'];
-                $name = $row['name'];
-                $email = $row['email'];
-                $comment = $row['comment'];
-                echo '
-                <tr>
-                    <td>'.$id.'</td>
-                    <td>'.htmlspecialchars($name).'</td>
-                    <td>'.htmlspecialchars($email).'</td>
-                    <td>'.htmlspecialchars($comment).'</td>
-                    <td class="text-center">
-                        <a href="update.php?update_id='.$id.'" class="btn btn-success btn-sm">Update</a>
-                    </td>
-                    <td class="text-center">
-                        <a href="delete.php?delete_id='.$id.'" class="btn btn-danger btn-sm" onclick="return confirm(\'Biztosan törölni szeretnéd?\')">Delete</a>
-                    </td>
-                </tr>';
+                $username= $row['username'];
+                $password = $row['password'];
+            
+             echo '
+<tr>
+  <td>'.$id.'</td>
+  <td>'.htmlspecialchars($username).'</td>
+  <td>'.htmlspecialchars($password).'</td>
+<td class="text-center">
+    <a href="update_admin.php?update_id='.$id.'" class="btn btn-success btn-sm">Update</a>
+  </td>
+  <td class="text-center">
+    <a href="delete_admin.php?delete_id='.$id.'" class="btn btn-danger btn-sm" onclick="return confirm(\'Biztosan törölni szeretnéd?\')">Delete</a>
+  </td>
+</tr>';
+
             }
         } else {
             echo '<tr><td colspan="6" class="text-center text-muted">No data found.</td></tr>';
